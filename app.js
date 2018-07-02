@@ -30,18 +30,29 @@ app.post("/pizzas", (req, res) => {
   res.send(pizzas);
 });
 
+findPizzaById = id => pizzas.find(pizza => pizza.id === id);
+
 // Update a pizza with the corresponding id
 app.put("/pizzas/:id", (req, res) => {
-  const id = Number(req.params.id);
-  pizzas = [...pizzas.slice(0, id), req.body, ...pizzas.slice(id + 1)];
+  const targetPizza = findPizzaById(req.params.id);
+  const targetPizzaIndex = pizzas.indexOf(targetPizza);
+  const updatedPizza = { ...targetPizza, ...req.body };
+  pizzas = [
+    ...pizzas.slice(0, targetPizzaIndex),
+    updatedPizza,
+    ...pizzas.slice(targetPizzaIndex + 1)
+  ];
   res.send(pizzas);
 });
 
 // Delete a pizza
 app.delete("/pizzas/:id", (req, res) => {
-  const id = Number(req.params.id);
-  console.log("id is", id);
-  pizzas = [...pizzas.slice(0, id), ...pizzas.slice(id + 1)];
+  const targetPizza = findPizzaById(req.params.id);
+  const targetPizzaIndex = pizzas.indexOf(targetPizza);
+  pizzas = [
+    ...pizzas.slice(0, targetPizzaIndex),
+    ...pizzas.slice(targetPizzaIndex + 1)
+  ];
   res.send(`Pizza id: ${req.params.id} was deleted.`);
 });
 
