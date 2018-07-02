@@ -21,7 +21,7 @@ app.get("/pizzas", (req, res) => {
 // GET the pizza with the corresponding id
 app.get("/pizzas/:id", (req, res) => {
   const pizza = pizzas.filter(pizza => pizza.id === req.params.id);
-  res.send(pizza);
+  res.send(pizza[0]);
 });
 
 // POST a new pizza
