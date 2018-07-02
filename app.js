@@ -3,7 +3,8 @@ const bodyParser = require("body-parser");
 
 const app = express();
 app.use(bodyParser.json());
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
+
 let pizzas = [
   { id: "1", name: "hawaiian pizza", price: 10 },
   { id: "2", name: "pepperoni pizza", price: 20 }
