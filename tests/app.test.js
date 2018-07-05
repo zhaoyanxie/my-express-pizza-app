@@ -55,12 +55,10 @@ test("PUT /pizzas/1 should update a pizza of id 1", async () => {
     .put("/pizzas/1")
     .send(TEST_DATA);
   expect(response.status).toEqual(200);
-  console.log("here-->", response.body);
   expect(response.body[0]).toEqual({ ...initialData.body, ...TEST_DATA });
 });
 
-test('DELETE /pizzas/1 should delete pizza of id 1', async () => {
-  const response = await request(app)
-    .delete("/pizzas/1")
+test("DELETE /pizzas/1 should delete pizza of id 1", async () => {
+  const response = await request(app).delete("/pizzas/1");
   expect(response.body).toBe("Pizza id: 1 was deleted.");
-})
+});
