@@ -4,6 +4,7 @@ const app = require("../app");
 test("GET / should return 'hello pizza world'", async () => {
   const response = await request(app).get("/");
   expect(response.status).toEqual(200);
+  expect(1).toBe(2);
   expect(response.body).toEqual("Hello Pizza World!");
 });
 
